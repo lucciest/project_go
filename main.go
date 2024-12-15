@@ -7,7 +7,7 @@ import (
 )
 
 func index(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("templates/index.html")
+	t, err := template.ParseFiles("templates/index.html", "templates/header.html", "templates/footer.html")
 
 	if err != nil {
 		fmt.Fprintf(w, err.Error())
@@ -17,7 +17,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleFunc() {
-	http.HandleFunc("/", index)
+	http.HandleFunc("/home", index)
 	http.ListenAndServe(":8080", nil)
 }
 
