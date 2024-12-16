@@ -3,12 +3,22 @@
 {{ template "header" }}
 
 <main class="px-3">
-    <h1>Новости</h1>
+    <h1>Посты</h1>
     <p class="lead">
-        
+        {{ range . }}
+        <div class="alert alert-danger">
+            <h2> {{ .Title }}</h2>
+            <p> {{ .Anons }}</p>
+            <a href="/post/{{ .Id}}" class="btn btn-danger">Открыть пост</a>
+        </div>
+        {{ else }}
+
+        <p class="lead">Постов нет!</p>
+
+        {{ end }}
     </p>
     <p class="lead">
-        <a href="#" class="btn btn-lg btn-outline-secondary">Больше новостей</a>
+        <a href="#" class="btn btn-lg btn-outline-secondary">Больше постов</a>
     </p>
 </main>
 

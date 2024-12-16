@@ -1,0 +1,16 @@
+{{ define "profile" }}
+
+{{ template "header" }}
+
+<main class="px-3">
+    <h1>Профиль</h1>
+    <p class="lead">Добро пожаловать на страницу профиля!</p>
+    <p>Ваш логин: {{ .Username }}</p>
+    <p>Ваш email: {{ .Email }}</p>
+    <a href="/logout" class="btn btn-lg btn-outline-secondary">Выйти</a>
+</main>
+
+{{ template "footer" }}
+
+{{ end }}
+

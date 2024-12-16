@@ -1,0 +1,19 @@
+{{ define "login" }}
+
+{{ template "header" }}
+
+<main class="px-3">
+    <h1>Авторизация</h1>
+    <form action="/login" method="post">
+        <input type="text" name="username" id="username" placeholder="Логин" class="form-control"><br>
+        <input type="password" name="password" id="password" placeholder="Пароль" class="form-control"><br>
+        <button class="btn btn-lg btn-outline-secondary">Войти</button>
+    </form>
+    <p class="lead mt-3">
+        Нет аккаунта? <a href="/register" class="text-white">Зарегистрируйтесь</a>.
+    </p>
+</main>
+
+{{ template "footer" }}
+
+{{ end }}
