@@ -1,16 +1,22 @@
 {{ define "profile" }}
-
 {{ template "header" }}
-
 <main class="px-3">
     <h1>Профиль</h1>
-    <p class="lead">Добро пожаловать на страницу профиля!</p>
     <p>Ваш логин: {{ .Username }}</p>
     <p>Ваш email: {{ .Email }}</p>
-    <a href="/logout" class="btn btn-lg btn-outline-secondary">Выйти</a>
+    <a href="/logout" class="btn btn-outline-secondary">Выйти</a>
+    <h3 style="margin-top: 50px;">Ваши посты</h3>
+    {{ range .Posts }}
+        <div class="alert alert-secondary">
+            <h4>{{ .Title }}</h4>
+            <p>{{ .Anons }}</p>
+            <a href="/edit_post?id={{ .Id }}" class="btn btn-warning">Редактировать</a>
+            <a href="/delete_post?id={{ .Id }}" class="btn btn-danger" onclick="return confirm('Удалить пост?');">Удалить</a>
+        </div>
+    {{ else }}
+        <p>У вас еще нет постов.</p>
+    {{ end }}
 </main>
-
 {{ template "footer" }}
-
 {{ end }}
 

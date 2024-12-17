@@ -4,6 +4,7 @@
 
 <main class="px-3">
     <h1>{{ .Title }}</h1>
+    <p class="text-muted">Автор: {{ .AuthorUsername }}</p> <!-- Имя автора -->
     <p class="lead">{{ .FullText }}</p>
     <p class="lead">
         <a href="/home" class="btn btn-lg btn-outline-secondary">Вернуться на главную</a>
@@ -13,3 +14,4 @@
 {{ template "footer" }}
 
 {{ end }}
+

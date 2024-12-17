@@ -1,0 +1,19 @@
+{{ define "edit" }}
+{{ template "header" }}
+
+<main class="px-3">
+    <h1>Редактирование поста</h1>
+    <form action="/edit_post" method="post">
+        <input type="hidden" name="id" value="{{ .Id }}">
+        <input type="text" name="title" id="title" value="{{ .Title }}" placeholder="Название поста"
+            class="form-control"><br>
+        <textarea name="anons" id="anons" class="form-control"
+            placeholder="Анонс поста">{{ .Anons }}</textarea><br>
+        <textarea name="full_text" id="full_text" class="form-control"
+            placeholder="Текст поста" rows="5">{{ .FullText }}</textarea><br>
+        <button class="btn btn-lg btn-outline-secondary">Сохранить</button>
+    </form>
+</main>
+
+{{ template "footer" }}
+{{ end }}
