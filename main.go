@@ -40,24 +40,31 @@ func index(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-
 	defer db.Close()
 
-	//Выборка данных
-	res, err := db.Query("Select *  from `articles`")
+	// Определяем, сколько постов показывать (по умолчанию 7)
+	limit := 7
+	offset := 0
+
+	// Если запрос с параметром для больше постов, меняем параметры limit и offset
+	if r.URL.Query().Get("show_all") == "true" {
+		limit = 1000 // Или любой другой большой номер, чтобы показать все
+		offset = 0
+	}
+
+	// Выборка данных
+	rows, err := db.Query("SELECT * FROM `articles` LIMIT ? OFFSET ?", limit, offset)
 	if err != nil {
 		panic(err)
 	}
 
-	posts = []Article{}
-
-	for res.Next() {
+	posts := []Article{}
+	for rows.Next() {
 		var post Article
-		err = res.Scan(&post.Id, &post.Title, &post.Anons, &post.FullText, &post.Author)
+		err = rows.Scan(&post.Id, &post.Title, &post.Anons, &post.FullText, &post.Author)
 		if err != nil {
 			panic(err)
 		}
-
 		posts = append(posts, post)
 	}
 
@@ -144,7 +151,6 @@ func show_post(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Добавление имени автора в структуру для шаблона
 	data := struct {
 		Article
 		AuthorUsername string
